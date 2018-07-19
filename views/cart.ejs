@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cart</title>
+      <meta charset="utf-8">
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body class= 'bg'>
+	<% include partials/nav.ejs %>
+	<% for(i=0; i<length ; i++) { %>
+		<div class="prod">
+			<h3><%= pname[i] %></h3>
+			<p><%= pprice[i] %></p>
+		</div><br>
+	<% } %>
+	<div class="prod"><h2>Total: $<%= total %></h2><br></div>
+	<a onclick="checkOut()" name="button" class="btn btn-primary">Check Out  <span class ="glyphicon glyphicon-check"></span></a><br><br>
+	
+	<script>
+      	function checkOut() {
+	        $.ajax({
+	            type: 'GET',
+	            url : '/cart/checkOut',
+	            success: ()=>{
+	            	$( "div" ).remove(".prod");
+	            }
+	            
+	        });}
+ 	</script>
+</body>
+</html>
