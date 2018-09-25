@@ -158,7 +158,9 @@ function addToCart(productId)
         success: (data)=> {
             if(data.status==1){
               alert('added to cart');
-            }
+            }else{
+	    	alert('Out of stoke');
+	    }
         }
     });
   }
