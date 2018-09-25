@@ -6,38 +6,38 @@ const User = require('../models/user-model');
 
 router.get('/addToCart', (req,res)=>{
 	if(req.user)
-	{
+	    {
 		luser = req.user;
 		var pID = req.query.pID;
 		console.log('id is', pID);
 		Product.findOne({_id : pID}, function (err, prod) {
-			if (err) throw err;
-            if (prod) {
-            	if(prod.productQuantity<=0)
-            	{
-            		var red= '/products/name/'+prod._id;
-            		res.redirect(red);
-            	}
-            	prod.productQuantity = prod.productQuantity - 1;
-            	prod.save((err, updatedProd)=>
-            	{
-            		if(err) throw err;
-            		console.log('product updated');
-            	});
-            }
-		});
-		User.findOne({_id : luser._id}, (err, user)=>{
-			if(err) throw err;
-			if(user) {
-				user.cart.push(pID);
-				user.save((err, updatedProd)=>{
+		    if (err) throw err;
+		    if (prod) {
+			if(prod.productQuantity>0)
+			{
+			    prod.productQuantity = prod.productQuantity - 1;
+			    prod.save((err, updatedProd)=>
+			    {
+				if(err) throw err;
+				console.log('product updated');
+			    });
+			    User.findOne({_id : luser._id}, (err, user)=>{
+				if(err) throw err;
+				if(user) {
+				    user.cart.push(pID);
+				    user.save((err, updatedProd)=>{
 					if(err) throw err;
-            		console.log('user updated');
-				})
+					console.log('user updated');
+				    })
+				}
+			    });
+			    res.send({status: 1});
+			}else{
+			    res.send({status :0});
 			}
+		    }
 		});
-	}
-	res.send({status: 1});
+	    }
 });
 
 router.get('/showCart', (req,res)=>
