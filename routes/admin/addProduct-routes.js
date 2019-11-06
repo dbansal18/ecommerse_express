@@ -16,7 +16,7 @@ app.use(express.static('/views'));
 var thumbnailPath = [];
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../public/products')
+        cb(null, './public/products')
     },
     filename: function (req, file, cb) {
     	var abc = Date.now();
