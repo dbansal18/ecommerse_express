@@ -4,7 +4,7 @@ module.exports = {
             clientSecret: 'zDLyo0oGj6Ry-3Ky5mCI5-Zg'
         },
         mongodb: {
-            dbURI: 'mongodb://localhost/ecommerce'
+            dbURI: 'mongodb://dbansal:dbansal18@ds253468.mlab.com:53468/ecommerse_site'
         },
         session: {
             cookieKey: 'dbansalurffdevil'
