@@ -22,7 +22,7 @@ router.get('/addToCart', (req,res)=>{
 				console.log('product updated');
 			    });
 			    User.findOne({_id : luser._id}, (err, user)=>{
-				if(err) throw err;
+				if(err) console.log('1', err);
 				if(user) {
 				    user.cart.push(pID);
 				    user.save((err, updatedProd)=>{

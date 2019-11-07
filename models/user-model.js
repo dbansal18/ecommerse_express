@@ -12,6 +12,8 @@ const userSchema = new Schema({
     role: String,
     loginType: String,
     cart: [String]
+},{
+  usePushEach : true
 });
 
 const User = mongoose.model('user', userSchema);
